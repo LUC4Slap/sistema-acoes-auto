@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sigla: MyString
+  preco: 1.5
+  data_busca: 2026-04-23
+
+two:
+  sigla: MyString
+  preco: 1.5
+  data_busca: 2026-04-23

@@ -1,0 +1,24 @@
+<tr id="<%= dom_id acao %>" class="border-bottom">
+  <td class="ps-4">
+    <h5 class="mb-0 text-primary"><strong><%= acao.sigla %></strong></h5>
+  </td>
+
+  <td>
+    <span class="fs-5 fw-semibold text-success">R$ <%= number_to_currency(acao.preco, unit: "", separator: ",", delimiter: ".") %></span>
+  </td>
+
+  <td>
+    <span class="badge bg-secondary"><%= acao.data_busca.strftime('%d/%m/%Y') %></span>
+  </td>
+
+  <td class="text-center">
+    <div class="btn-group" role="group">
+      <%= link_to acao, class: "btn btn-sm btn-outline-primary", title: "Ver detalhes" do %>
+        <i class="bi bi-eye"></i> Ver
+      <% end %>
+      <%= link_to historico_path(sigla: acao.sigla), class: "btn btn-sm btn-outline-info", title: "Ver histórico" do %>
+        <i class="bi bi-clock-history"></i> Histórico
+      <% end %>
+    </div>
+  </td>
+</tr>

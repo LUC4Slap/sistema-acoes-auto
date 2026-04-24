@@ -1,0 +1,92 @@
+<div class="container mt-4">
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+  
+  <% if alert %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%= alert %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-primary text-white py-3">
+          <h3 class="mb-0">
+            <i class="bi bi-gear"></i> Configurações do Sistema
+          </h3>
+        </div>
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <div class="alert alert-info" role="alert">
+              <h5 class="alert-heading">
+                <i class="bi bi-info-circle"></i> Sobre o Token da API
+              </h5>
+              <p class="mb-0">
+                O token é necessário para buscar as cotações das ações na API brapi.dev.
+                Você pode obter seu token gratuitamente em: 
+                <a href="https://brapi.dev" target="_blank" class="alert-link">https://brapi.dev</a>
+              </p>
+            </div>
+          </div>
+
+          <%= form_with url: configuracoes_path, method: :patch, local: true do |form| %>
+            <div class="mb-4">
+              <%= form.label :token_api, "Token da API brapi.dev", class: "form-label fw-bold" %>
+              <%= form.text_field :token_api, 
+                  value: @token_api, 
+                  class: "form-control form-control-lg", 
+                  placeholder: "Cole seu token aqui",
+                  required: true %>
+              <div class="form-text">
+                <i class="bi bi-shield-lock"></i> 
+                Seu token fica armazenado com segurança no banco de dados local
+              </div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= form.submit "💾 Salvar Configuração", class: "btn btn-primary btn-lg" %>
+            </div>
+          <% end %>
+
+          <hr class="my-4">
+
+          <div class="row text-center">
+            <div class="col-md-4 mb-3">
+              <div class="p-3 border rounded">
+                <i class="bi bi-check-circle text-success" style="font-size: 2rem;"></i>
+                <h6 class="mt-2 mb-0">Simples</h6>
+                <small class="text-muted">Configure em segundos</small>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="p-3 border rounded">
+                <i class="bi bi-shield-check text-primary" style="font-size: 2rem;"></i>
+                <h6 class="mt-2 mb-0">Seguro</h6>
+                <small class="text-muted">Dados protegidos</small>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <div class="p-3 border rounded">
+                <i class="bi bi-lightning text-warning" style="font-size: 2rem;"></i>
+                <h6 class="mt-2 mb-0">Automático</h6>
+                <small class="text-muted">Atualiza diariamente</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <%= link_to acaos_path, class: "btn btn-outline-secondary" do %>
+          <i class="bi bi-arrow-left"></i> Voltar para Ações
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

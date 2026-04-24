@@ -1,0 +1,37 @@
+<%= form_with(model: acao) do |form| %>
+  <% if acao.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h5 class="alert-heading">
+        <i class="bi bi-exclamation-triangle"></i>
+        <%= pluralize(acao.errors.count, "erro") %> encontrado:
+      </h5>
+      <ul class="mb-0">
+        <% acao.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :sigla, "Sigla da Ação", class: "form-label fw-bold" %>
+    <%= form.text_field :sigla, class: "form-control form-control-lg", placeholder: "Ex: PETR4, VALE3, ITUB4" %>
+    <div class="form-text">Digite a sigla da ação (ticker) que deseja acompanhar</div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :preco, "Preço (R$)", class: "form-label fw-bold" %>
+    <%= form.number_field :preco, step: 0.01, class: "form-control form-control-lg", placeholder: "0.00" %>
+    <div class="form-text">Preço atual da ação em reais</div>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :data_busca, "Data da Busca", class: "form-label fw-bold" %>
+    <%= form.date_field :data_busca, class: "form-control form-control-lg" %>
+    <div class="form-text">Data em que o preço foi consultado</div>
+  </div>
+
+  <div class="d-grid">
+    <%= form.submit "Salvar Ação", class: "btn btn-primary btn-lg" %>
+  </div>
+<% end %>

@@ -1,0 +1,46 @@
+<div id="<%= dom_id acao %>" class="card border-0 shadow-sm">
+  <div class="card-header bg-primary text-white py-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">
+        <i class="bi bi-graph-up-arrow"></i> <%= acao.sigla %>
+      </h3>
+      <span class="badge bg-light text-dark">
+        <i class="bi bi-calendar3"></i> <%= acao.data_busca.strftime('%d/%m/%Y') %>
+      </span>
+    </div>
+  </div>
+  <div class="card-body p-4">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="mb-4">
+          <label class="text-muted small mb-2">COTAÇÃO ATUAL</label>
+          <h2 class="display-5 text-success fw-bold mb-0">
+            R$ <%= number_to_currency(acao.preco, unit: "", separator: ",", delimiter: ".") %>
+          </h2>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-4">
+          <label class="text-muted small mb-2">DATA DA CONSULTA</label>
+          <h4 class="text-secondary mb-0">
+            <i class="bi bi-clock"></i> <%= acao.data_busca.strftime('%d/%m/%Y às %H:%M') %>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="d-flex gap-2 justify-content-end">
+      <%= link_to historico_path(sigla: acao.sigla), class: "btn btn-outline-info" do %>
+        <i class="bi bi-clock-history"></i> Ver Histórico
+      <% end %>
+      <!-- <%= link_to edit_acao_path(acao), class: "btn btn-outline-primary" do %>
+        <i class="bi bi-pencil"></i> Editar
+      <% end %> -->
+      <%= link_to acaos_path, class: "btn btn-outline-secondary" do %>
+        <i class="bi bi-arrow-left"></i> Voltar
+      <% end %>
+    </div>
+  </div>
+</div>

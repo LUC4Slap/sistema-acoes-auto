@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-primary text-white py-3">
+          <h3 class="mb-0">
+            <i class="bi bi-plus-circle"></i> Nova Ação
+          </h3>
+        </div>
+        <div class="card-body p-4">
+          <%= render "form", acao: @acao %>
+        </div>
+      </div>
+      <div class="mt-3">
+        <%= link_to acaos_path, class: "btn btn-outline-secondary" do %>
+          <i class="bi bi-arrow-left"></i> Voltar para Ações
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
