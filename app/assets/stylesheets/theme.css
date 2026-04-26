@@ -1,0 +1,88 @@
+/* Theme variables */
+[data-theme="light"] {
+  --bs-body-bg: #f8f9fa;
+  --bs-body-color: #212529;
+  --card-bg: #ffffff;
+  --card-border: rgba(0,0,0,0.125);
+  --navbar-bg: #212529;
+  --table-hover: rgba(0, 123, 255, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --input-bg: #ffffff;
+  --input-color: #212529;
+  --border-color: #dee2e6;
+}
+
+[data-theme="dark"] {
+  --bs-body-bg: #212529;
+  --bs-body-color: #e9ecef;
+  --card-bg: #343a40;
+  --card-border: rgba(255,255,255,0.125);
+  --navbar-bg: #000000;
+  --table-hover: rgba(255, 255, 255, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --input-bg: #495057;
+  --input-color: #e9ecef;
+  --border-color: #495057;
+}
+
+/* Apply theme */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  background-color: var(--bs-body-bg) !important;
+  color: var(--bs-body-color) !important;
+}
+
+.card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-color: var(--card-bg) !important;
+  border-color: var(--card-border) !important;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px var(--shadow-color) !important;
+}
+
+.table {
+  color: var(--bs-body-color) !important;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: var(--table-hover) !important;
+}
+
+.navbar {
+  background-color: var(--navbar-bg) !important;
+}
+
+.btn {
+  transition: all 0.2s ease;
+}
+
+.form-control, .form-select {
+  background-color: var(--input-bg) !important;
+  color: var(--input-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.alert {
+  border-color: var(--border-color) !important;
+}
+
+.table thead th {
+  border-bottom-color: var(--border-color) !important;
+}
+
+.table td, .table th {
+  border-top-color: var(--border-color) !important;
+}
