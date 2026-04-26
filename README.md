@@ -130,6 +130,38 @@ Abra seu navegador e acesse: **http://localhost:3000**
 
 ---
 
+## 🐳 Executando com Docker
+
+O projeto inclui suporte para Docker, permitindo rodar a aplicação em um container isolado com banco de dados SQLite.
+
+### Pré-requisitos
+- Docker instalado
+- Docker Compose instalado (opcional)
+
+### Construindo a imagem
+
+```bash
+docker build -t verifi-acoes .
+```
+
+### Executando com Docker Compose
+
+1. Defina a variável de ambiente `RAILS_MASTER_KEY` com o conteúdo do arquivo `config/master.key`:
+   ```bash
+   export RAILS_MASTER_KEY=$(cat config/master.key)
+   ```
+
+2. Suba o container:
+   ```bash
+   docker-compose up -d
+   ```
+
+3. A aplicação estará disponível em `http://localhost:5001` (ou porta configurada no `docker-compose.yml`).
+
+> **Nota**: O banco de dados SQLite é criado automaticamente dentro do container durante o build.
+
+---
+
 ## ⚙️ Configuração Inicial
 
 ### 1. Obter Token da API
@@ -204,6 +236,7 @@ O sistema utiliza o **Rufus-scheduler** para executar tarefas agendadas. Quando 
 | **Ruby 3.2.3** | Linguagem de programação |
 | **Rails 7.1.6** | Framework web full-stack |
 | **SQLite** | Banco de dados relacional leve |
+| **Docker** | Containerização da aplicação |
 | **Bootstrap 5** | Framework CSS para interface responsiva |
 | **Bootstrap Icons** | Biblioteca de ícones |
 | **Faraday** | Cliente HTTP para requisições à API |
