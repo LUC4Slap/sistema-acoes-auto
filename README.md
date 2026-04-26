@@ -51,6 +51,12 @@ Ideal para investidores que querem manter um controle simples e eficiente das su
 - Animações suaves e feedback visual
 - Modo claro otimizado para leitura
 
+### 🌗 Temas Claro e Escuro
+- Alternância entre modo claro e escuro
+- Detecção automática da preferência do sistema
+- Preferência salva no navegador (persiste entre sessões)
+- Botão de alternância na barra de navegação
+
 ---
 
 ## 🔧 Requisitos do Sistema
