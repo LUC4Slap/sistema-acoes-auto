@@ -26,7 +26,7 @@
               <tr>
                 <td><strong><%= acao.sigla %></strong></td>
                 <td>R$ <%= number_to_currency(acao.preco, unit: "", separator: ",", delimiter: ".") %></td>
-                <td><%= acao.data_busca.strftime('%d/%m/%Y') %></td>
+                <td><%= acao.created_at.strftime('%d/%m/%Y %H:%M') %></td>
                 <td>
                   <% if index < @historico.size - 1 %>
                     <% variacao = ((acao.preco - @historico[index + 1].preco) / @historico[index + 1].preco * 100).round(2) %>

@@ -1,5 +1,6 @@
+require "byebug"
 class AcaosController < ApplicationController
-  before_action :set_acao, only: %i[ show edit update destroy ]
+  before_action :set_acao, only: %i[ show edit update destroy buscar_preco ]
 
   # GET /acaos or /acaos.json
   def index
@@ -58,6 +59,19 @@ class AcaosController < ApplicationController
     end
   end
 
+  # POST /acaos/1/buscar_preco
+  def buscar_preco
+    # debugger
+    preco = buscar_acao(@acao.sigla)
+
+    if preco
+      @acao = Acao.create(sigla: @acao.sigla, preco: preco, data_busca: Time.current)
+      redirect_to @acao, notice: "Preço atualizado com sucesso! Novo preço: R$ #{ActionController::Base.helpers.number_to_currency(preco, unit: "", separator: ",", delimiter: ".")}"
+    else
+      redirect_to @acao, alert: "Não foi possível buscar o preço da ação. Verifique a configuração do token da API."
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_acao
@@ -67,5 +81,25 @@ class AcaosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def acao_params
       params.require(:acao).permit(:sigla, :preco, :data_busca)
+    end
+
+    # Buscar preço da ação na API
+    def buscar_acao(sigla)
+      token = Configuracao.token_api
+
+      unless token
+        Rails.logger.error "TOKEN_API não encontrado. Configure o token em Configurações."
+        return nil
+      end
+
+      begin
+        response = Faraday.get("https://brapi.dev/api/quote/#{sigla}") do |req|
+          req.headers['Authorization'] = "Bearer #{token}"
+        end
+        JSON.parse(response.body)["results"][0]["regularMarketPrice"]
+      rescue => e
+        Rails.logger.error "Erro ao buscar preço da ação #{sigla}: #{e.message}"
+        nil
+      end
     end
 end

@@ -20,6 +20,9 @@ Rails.application.configure do
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
 
+  # Set secret_key_base directly for testing
+  config.secret_key_base = "aadfe32a592902b8eeb0528726ce1d86cba3d2b522cbfda74f3bfcd7ac4dc2ceb323af8cb9a7781719794eb82a84d18b26380faa6538be50e700c6cb658cbae0"
+
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
 
@@ -39,6 +42,9 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
+  # Disable SQLite in production warning
+  config.active_record.sqlite3_production_warning = false
+
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
@@ -49,7 +55,7 @@ Rails.application.configure do
   # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new(STDOUT)

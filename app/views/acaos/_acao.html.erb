@@ -8,7 +8,7 @@
   </td>
 
   <td>
-    <span class="badge bg-secondary"><%= acao.data_busca.strftime('%d/%m/%Y') %></span>
+    <span class="badge bg-secondary"><%= acao.created_at.strftime('%d/%m/%Y %H:%M') %></span>
   </td>
 
   <td class="text-center">
@@ -19,6 +19,10 @@
       <%= link_to historico_path(sigla: acao.sigla), class: "btn btn-sm btn-outline-info", title: "Ver histórico" do %>
         <i class="bi bi-clock-history"></i> Histórico
       <% end %>
+      <%= button_to "Buscar Preço", buscar_preco_acao_path(acao),
+                    class: "btn btn-sm btn-outline-warning",
+                    title: "Buscar preço atual",
+                    form: { data: { turbo_confirm: "Deseja buscar o preço atual da ação?" } } %>
     </div>
   </td>
 </tr>

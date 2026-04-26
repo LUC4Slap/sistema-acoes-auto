@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root "acaos#index"
-  resources :acaos
+  resources :acaos do
+    member do
+      post :buscar_preco
+    end
+  end
   get 'historico', to: 'historico#index', as: 'historico'
   get 'configuracoes', to: 'configuracoes#index'
   patch 'configuracoes', to: 'configuracoes#update'

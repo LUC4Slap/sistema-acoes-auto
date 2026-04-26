@@ -1,0 +1,10 @@
+services:
+  acoes:
+    image: .
+    restart: unless-stopped
+    ports:
+      - 5001:3000
+    environment:
+      - RAILS_ENV=production
+      - SECRET_KEY_BASE=aadfe32a592902b8eeb0528726ce1d86cba3d2b522cbfda74f3bfcd7ac4dc2ceb323af8cb9a7781719794eb82a84d18b26380faa6538be50e700c6cb658cbae0
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
