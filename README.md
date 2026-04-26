@@ -85,8 +85,8 @@ Se você baixou o projeto como ZIP, extraia-o em uma pasta de sua preferência.
 
 Se está usando Git:
 ```bash
-git clone <url-do-repositorio>
-cd verifi-acoes
+git clone https://github.com/LUC4Slap/sistema-acoes-auto
+cd sistema-acoes-auto
 ```
 
 ### Passo 2: Instalar as dependências
@@ -141,7 +141,7 @@ O projeto inclui suporte para Docker, permitindo rodar a aplicação em um conta
 ### Construindo a imagem
 
 ```bash
-docker build -t verifi-acoes .
+docker build -t sistema-acoes-auto .
 ```
 
 ### Executando com Docker Compose
