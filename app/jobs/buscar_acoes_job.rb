@@ -24,7 +24,7 @@ class BuscarAcoesJob < ApplicationJob
       Rails.logger.error "TOKEN_API não encontrado. Configure o token em Configurações."
       return nil
     end
-    
+
     response = Faraday.get("https://brapi.dev/api/quote/#{sigla}") do |req|
       req.headers['Authorization'] = "Bearer #{token}"
     end

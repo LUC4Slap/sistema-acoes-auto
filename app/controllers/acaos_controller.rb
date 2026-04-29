@@ -4,8 +4,10 @@ class AcaosController < ApplicationController
 
   # GET /acaos or /acaos.json
   def index
-    # Retorna apenas a ação mais recente
-    @acaos = [Acao.order(data_busca: :desc).first].compact
+    # Retorna a ação mais recente de cada sigla (agrupadas)
+    @acaos = Acao.where(id: Acao.select("MAX(id)")
+                                .group(:sigla))
+                 .order(data_busca: :desc)
   end
 
   # GET /acaos/1 or /acaos/1.json
