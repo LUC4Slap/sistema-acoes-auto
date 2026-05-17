@@ -19,6 +19,7 @@
               <th scope="col">Preço</th>
               <th scope="col">Data da Busca</th>
               <th scope="col">Variação</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +40,11 @@
                     <% end %>
                   <% else %>
                     <span class="text-muted">-</span>
+                  <% end %>
+                </td>
+                <td>
+                  <%= button_to destroy_historico_path(acao), method: :delete, data: { turbo_confirm: "Tem certeza que deseja excluir este registro?" }, class: "btn btn-danger btn-sm" do %>
+                    <i class="bi bi-trash"></i> Excluir
                   <% end %>
                 </td>
               </tr>

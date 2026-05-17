@@ -5,8 +5,27 @@ class BuscarAcoesJob < ApplicationJob
 
   def perform(*args)
     acoes_busca.each do |sigla|
-      preco = buscar_acao(sigla)
-      Acao.create(sigla: sigla, preco: preco, data_busca: Time.current)
+      preco_novo = buscar_acao(sigla)
+      
+      # Buscar a última ação salva (anterior) para comparação
+      acao_anterior = Acao.where(sigla: sigla).order(data_busca: :desc).first
+      
+      # Criar nova ação com o preço atual
+      nova_acao = Acao.create(sigla: sigla, preco: preco_novo, data_busca: Time.current)
+      # debugger
+
+      if acao_anterior.nil? || preco_novo < acao_anterior.preco
+        begin
+          NotificarAcaoCompreMailer.notificar_compra(
+            acao: nova_acao,
+            preco_atual: preco_novo,
+            destinatario: 'lucaslap27@gmail.com'
+          ).deliver_now
+        rescue => e
+          Rails.logger.error "Erro ao enviar email para #{sigla}: #{e.message}"
+          # Continua o processamento mesmo se o email falhar
+        end
+      end
     end
   end
 

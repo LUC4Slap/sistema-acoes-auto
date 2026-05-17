@@ -1,0 +1,21 @@
+========================================
+  OPORTUNIDADE DE COMPRA
+========================================
+
+Olá!
+
+A ação <%= @acao.sigla %> atingiu um preço interessante para compra!
+
+DETALHES DA AÇÃO
+----------------
+Sigla: <%= @acao.sigla %>
+Preço atual: R$ <%= '%.2f' % @preco_atual %>
+Preço monitorado: R$ <%= '%.2f' % @acao.preco %>
+Data/Hora: <%= @data_notificacao.strftime('%d/%m/%Y às %H:%M:%S') %>
+
+Esta é uma notificação automática do sistema de monitoramento de ações.
+
+========================================
+Sistema de Monitoramento de Ações
+Esta é uma mensagem automática, por favor não responda.
+========================================

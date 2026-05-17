@@ -64,11 +64,26 @@ class AcaosController < ApplicationController
   # POST /acaos/1/buscar_preco
   def buscar_preco
     # debugger
-    preco = buscar_acao(@acao.sigla)
+    preco_novo = buscar_acao(@acao.sigla)
 
-    if preco
-      @acao = Acao.create(sigla: @acao.sigla, preco: preco, data_busca: Time.current)
-      redirect_to @acao, notice: "Preço atualizado com sucesso! Novo preço: R$ #{ActionController::Base.helpers.number_to_currency(preco, unit: "", separator: ",", delimiter: ".")}"
+    if preco_novo
+      # Buscar a última ação salva (anterior) para comparação
+      acao_anterior = Acao.where(sigla: @acao.sigla).order(data_busca: :desc).first
+      
+      # Criar nova ação com o preço atual
+      nova_acao = Acao.create(sigla: @acao.sigla, preco: preco_novo, data_busca: Time.current)
+      
+      if acao_anterior.nil? || preco_novo < acao_anterior.preco
+        NotificarAcaoCompreMailer.notificar_compra(
+          acao: nova_acao,
+          preco_atual: preco_novo,
+          destinatario: 'lucaslap27@gmail.com'
+        ).deliver_later
+        
+        redirect_to nova_acao, notice: "Preço atualizado com sucesso! Novo preço: R$ #{ActionController::Base.helpers.number_to_currency(preco_novo, unit: "", separator: ",", delimiter: ".")}. Email de notificação enviado! 📧"
+      else
+        redirect_to nova_acao, notice: "Preço atualizado com sucesso! Novo preço: R$ #{ActionController::Base.helpers.number_to_currency(preco_novo, unit: "", separator: ",", delimiter: ".")}"
+      end
     else
       redirect_to @acao, alert: "Não foi possível buscar o preço da ação. Verifique a configuração do token da API."
     end

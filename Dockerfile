@@ -33,7 +33,7 @@ COPY . .
 
 # Create storage directory and run database migrations
 RUN mkdir -p storage && \
-    SECRET_KEY_BASE_DUMMY=1 bin/rails db:create db:migrate
+    SECRET_KEY_BASE_DUMMY=1 bin/rails db:create db:migrate db:seed
 
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
